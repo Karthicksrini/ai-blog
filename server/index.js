@@ -38,7 +38,7 @@ app.post("/blog/", async (req, res) => {
 
     try {
         await initializeFetch(); // Initialize fetch before starting the server
-        const genAI = new GoogleGenerativeAI("AIzaSyCuN6eGWbIPO23hOki6mINwCocZmtfaN6Y"); // Replace with your API key
+        const genAI = new GoogleGenerativeAI("AIzaSyCuN6eGWbIPO23hOki6mINwCocZmtfaN6Y");
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         const prompt = `Create a breif blog post about: ${topic}
@@ -53,7 +53,7 @@ app.post("/blog/", async (req, res) => {
             throw new Error("Invalid response from AI model.");
         }
 
-        let text = response.candidates[0].content.parts[0].text; // Correct way to get the response text
+        let text = response.candidates[0].content.parts[0].text;
         const data = text.split("|")
         const blogPost = {
             id: uuidv4(),
