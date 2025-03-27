@@ -5,16 +5,6 @@ const { v4: uuidv4 } = require('uuid');
 
 let blogs = [];
 
-async function initializeFetch() {
-    try {
-        const { default: fetch, Headers } = await import('node-fetch');
-        global.fetch = fetch; // Make fetch globally available
-        global.Headers = Headers; // Make Headers globally available
-    } catch (error) {
-        console.error("Error initializing fetch:", error);
-    }
-}
-
 const app = express();
 
 app.use(cors());
@@ -37,7 +27,6 @@ app.post("/blog/", async (req, res) => {
     }
 
     try {
-        await initializeFetch(); // Initialize fetch before starting the server
         const genAI = new GoogleGenerativeAI("AIzaSyCuN6eGWbIPO23hOki6mINwCocZmtfaN6Y");
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
